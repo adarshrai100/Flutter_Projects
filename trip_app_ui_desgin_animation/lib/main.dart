@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
+import 'package:trip_app_ui_desgin_animation/FadeAnimation.dart';
 
 void main() => runApp(
   MaterialApp(
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
   PageController _pageController;
   int totalPage=4;
   void _onScroll(){
@@ -24,9 +25,15 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _pageController = PageController(
-      initialPage: 1,
+      initialPage: 0,
     )..addListener(_onScroll);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -105,11 +112,13 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    FadeAnimation(1,
                     Text(title,style: TextStyle(color: Colors.white, fontSize: 50, fontWeight: FontWeight.bold),),
+                    ),
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
+                    FadeAnimation(1.5, Row(
                       children: <Widget>[
                         Container(
                           margin: EdgeInsets.only(right: 3),
@@ -134,18 +143,18 @@ class _HomePageState extends State<HomePage> {
                         Text('4.0',style: TextStyle(color: Colors.white70),),
                         Text('(2300)',style: TextStyle(color: Colors.white38,fontSize: 12),)
                       ],
-                    ),
+                    )),
                     SizedBox(
                       height: 20,
                     ),
-                    Padding(
+                    FadeAnimation(2, Padding(
                       padding: const EdgeInsets.only(right: 50),
                       child: Text(description,style: TextStyle(color: Colors.white.withOpacity(0.7),height: 1.9, fontSize: 15),),
-                    ),
+                    )),
                     SizedBox(
                       height: 20,
                     ),
-                    Text('READ MORE',style: TextStyle(color: Colors.white),),
+                    FadeAnimation(2.5, Text('READ MORE',style: TextStyle(color: Colors.white),)),
                     SizedBox(
                       height: 30,
                     ),
